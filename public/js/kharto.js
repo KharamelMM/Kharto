@@ -1,5 +1,3 @@
-const URL = "https://khatro.herokuapp.com"
-
 const AUDIO = {
     notify: new Audio('../sound/notify.mp3'),
     error: new Audio('../sound/error.mp3'),
@@ -61,6 +59,8 @@ const MAX_TURN = 4;
  */
 var turn = 1;
 
+var url = window.location.href.split('?')[0];
+
 function isMyTurn() {
     return (turn & 2) !== 2 // Check the second bit
 }
@@ -84,7 +84,7 @@ function switchVolume(){
     }
 }
 function copyCode(){
-    navigator.clipboard.writeText(URL + "/?op=" + socket.id.slice(socket.id.length-4,socket.id.length));
+    navigator.clipboard.writeText( url+ "?op=" + socket.id.slice(socket.id.length-4,socket.id.length));
     $('#copied').removeClass("hidden");
     setTimeout(function() { $('#copied').addClass("hidden"); }, 5000);
 

@@ -204,10 +204,8 @@ button[value="15"] > .kharto-icon {
     cursor: pointer;
     user-select: none;
 }
-#messages, #tip{
-    position: relative;
-}
-#messages, .volume{
+
+.volume{
     z-index: 20;
 }
 .friend-invite{
@@ -215,13 +213,15 @@ button[value="15"] > .kharto-icon {
     z-index: 10;
     left:0;
     top: 0;
-    font-size: 4em;
+    font-size: 3em;
     user-select: none;
     display: inline-flex;
     align-items: center;
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.9);
+    transition: 0.2s;
+
 }
 .friend-invite > div{
     margin: 25%;
@@ -232,16 +232,19 @@ br{
 .material-icons.md-45 { font-size: 45px; }
 .code-container{
     cursor: pointer;
-    margin: 0.5em auto auto;
+    margin: 0.3em auto auto;
     padding: 2%;
-    width: 50%;
+    width: 30%;
     background-color: rgba(125,115,90,0.2);
     border-color: rgb(125,115,90);
     border-radius: 15px;
     border-style: inset;
     transition: 0.5s;
+    font-size: 0.7em;
 }
-
+.code::before{
+    content:"#";
+}
 #copied{
     font-size: 0.5em;
 }

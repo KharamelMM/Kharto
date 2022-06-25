@@ -30,10 +30,10 @@ io.sockets.on("connection", function (socket) {
         socket.emit("game.begin", {
             playing: true,
         });
-        players[op].socket.emit("game.begin", {
+        getOpponent(socket).emit("game.begin", {
             playing: false,
         });
-        
+
     } else createGame(socket);
 
     /*if (getOpponent(socket)) { // If has opponent
