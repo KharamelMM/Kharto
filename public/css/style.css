@@ -195,3 +195,60 @@ button[value="14"] > .kharto-icon,
 button[value="15"] > .kharto-icon {
     border-radius: 50%;
 }
+
+.volume{
+    font-size: 5em;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+#messages, #tip{
+    position: relative;
+}
+#messages, .volume{
+    z-index: 20;
+}
+.friend-invite{
+    position: absolute;
+    z-index: 10;
+    left:0;
+    top: 0;
+    font-size: 4em;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.9);
+}
+.friend-invite > div{
+    margin: 25%;
+}
+br{
+    user-select: none;
+}
+.material-icons.md-45 { font-size: 45px; }
+.code-container{
+    cursor: pointer;
+    margin: 0.5em auto auto;
+    padding: 2%;
+    width: 50%;
+    background-color: rgba(125,115,90,0.2);
+    border-color: rgb(125,115,90);
+    border-radius: 15px;
+    border-style: inset;
+    transition: 0.5s;
+}
+
+#copied{
+    font-size: 0.5em;
+}
+.hidden{
+    cursor: auto;
+    color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0);
+    transition: 2s;
+}

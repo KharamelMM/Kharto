@@ -16,16 +16,27 @@ app.use(express.static('public'))
     });
 
 
-var players = {},
-    unmatched;
+var players = {};
 
 
 io.sockets.on("connection", function (socket) {
+    socket.shortid = socket.id.slice(socket.id.length - 4, socket.id.length);
     console.log("Socket connected " + socket.id);
-    socket.emit('connect', {msg: "hello"});
-    joinGame(socket);
+    let url = new URL(socket.handshake.headers.referer);
+    let op = url.searchParams.get('op')
+    socket.emit('connect');
+    if (op && joinGame(socket, op)) {
+        // Send Game begin to both
+        socket.emit("game.begin", {
+            playing: true,
+        });
+        players[op].socket.emit("game.begin", {
+            playing: false,
+        });
+        
+    } else createGame(socket);
 
-    if (getOpponent(socket)) { // If has opponent
+    /*if (getOpponent(socket)) { // If has opponent
         // Send Game begin to both
         socket.emit("game.begin", {
             playing: true,
@@ -33,7 +44,7 @@ io.sockets.on("connection", function (socket) {
         getOpponent(socket).emit("game.begin", {
             playing: false,
         });
-    }
+    }*/
 
     socket.on("make.move", function (data) { // When someone make a move
         if (!getOpponent(socket)) return; // Check he still have an opponent
@@ -44,30 +55,42 @@ io.sockets.on("connection", function (socket) {
 
     socket.on("disconnect", function () { // When someone disconnect
 
-        if (!getOpponent(socket)) return; // Check he still have an opponent
+        if (getOpponent(socket)) { // Check he still have an opponent
 
-        // Tell to the opponent that his opponent has left. (Wow brain injury)
-        getOpponent(socket).emit("opponent.left");
+            // Tell to the opponent that his opponent has left. (Wow brain injury)
+            getOpponent(socket).emit("opponent.left");
+        }
+
+        delete players[socket.shortid];
+
 
     });
 });
 
-function joinGame(socket) {
-    players[socket.id] = {
-        opponent: unmatched,
-        socket: socket // The socket that is associated with this player
+function createGame(socket) {
+    players[socket.shortid] = {
+        opponent: null,
+        socket: socket
     };
-    if (unmatched) { // If someone is waiting for an opponent
-        players[unmatched].opponent = socket.id;
-        unmatched = null;
-    } else { // If no one is waiting for an opponent, we're gonna wait for an opponent.
-        unmatched = socket.id;
-    }
+
+}
+
+function joinGame(socket, opponent) {
+    if (!players[opponent]) return false; // If there's no opponent
+    if (players[opponent].opponent) return false; // If the opponent has already an opponent
+
+    players[socket.shortid] = {
+        opponent: players[opponent].socket.shortid,
+        socket: socket
+    };
+
+    players[opponent].opponent = socket.shortid;
+    return true;
 }
 
 function getOpponent(socket) {
-    if (!players[socket.id].opponent) {
-        return;
-    }
-    return players[players[socket.id].opponent].socket;
+    if (!players[socket.shortid]) return;
+    else if (!players[socket.shortid].opponent) return;
+    else if (!players[players[socket.shortid].opponent]) return;
+    else return players[players[socket.shortid].opponent].socket;
 }

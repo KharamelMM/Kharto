@@ -1,3 +1,14 @@
+const URL = "https://khatro.herokuapp.com"
+
+const AUDIO = {
+    notify: new Audio('../sound/notify.mp3'),
+    error: new Audio('../sound/error.mp3'),
+    victory: new Audio('../sound/victory.mp3'),
+    fail: new Audio('../sound/fail.mp3')
+};
+
+
+const DEFAULT_PAGE_TITLE = 'Kharto'
 const MAP_SIDE_LENGTH = 4;
 const BUTTON_ID = {
     // [y][x]
@@ -26,9 +37,11 @@ const MAP_BUTTON = [
     ["d0", "d1", "d2", "d3"]
 ]
 
-
 var socket = io();
 
+var muted = true;
+
+var game_finished = false;
 var available_tokens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Available tokens, check bits to get similarity
 var chosen_token = -1;
 // Map[y][x]. -1 is no token placed on the cell, otherwise the number correspond to the token.
@@ -61,11 +74,34 @@ function nextTurn() {
     turn = (turn + 1) % MAX_TURN;
 }
 
+function switchVolume(){
+    muted ^= 1;
+    if(muted)
+        $(".volume").text("volume_off");
+    else {
+        $(".volume").text("volume_up");
+        AUDIO.notify.play();
+    }
+}
+function copyCode(){
+    navigator.clipboard.writeText(URL + "/?op=" + socket.id.slice(socket.id.length-4,socket.id.length));
+    $('#copied').removeClass("hidden");
+    setTimeout(function() { $('#copied').addClass("hidden"); }, 5000);
+
+}
+
 $(function () {
     setupGame();
+    $('.volume').on("click", switchVolume);
+
+    socket.on("connect", function(){
+        $('.code-container').on("click",copyCode).removeClass("hidden");
+        $('.code').text(socket.id.slice(socket.id.length-4,socket.id.length));
+    });
 
     // Event is called when either player makes a move
     socket.on("move.made", function (data) {
+
         // Render the move
         if (isChoosingTurn()) {
             chosen_token = data.token;
@@ -81,6 +117,12 @@ $(function () {
         $("#chosen-token").attr("value", chosen_token); // Place the token as chosen token (-1 or token value)
         nextTurn();
 
+        console.log((!document.hasFocus()));
+        console.log(isMyTurn());
+        if ((!document.hasFocus()) && isMyTurn() && !muted) { // Now it's your turn !
+            AUDIO.notify.play();
+        }
+
         // If the game is still going, show who's turn it is
         if (!isGameOver()) {
             if (gameTied()) {
@@ -92,16 +134,24 @@ $(function () {
             }
             // If the game is over
         } else {
+            // Disable the board
+            $(".board button").attr("disabled", true);
+
+            game_finished = true;
+            document.title = DEFAULT_PAGE_TITLE;
             $("#tip").text("");
             // Show the result message
             if (isMyTurn()) {
                 $("#messages").text("You won !");
+                if(!muted) AUDIO.victory.play();
+                document.title += " - You won !"
             } else {
                 $("#messages").text("Game over, you lost..");
+                if(!muted) AUDIO.fail.play();
+                document.title += " - You lost.."
             }
 
-            // Disable the board
-            $(".board button").attr("disabled", true);
+
         }
     });
 
@@ -109,19 +159,23 @@ $(function () {
     socket.on("game.begin", function (data) {
         setupGame();
         if (!data.playing) turn += 2; // Opponent plays first !
+        $('.friend-invite').remove();
         renderTable();
     });
 
     // Disable the board if the opponent leaves
     socket.on("opponent.left", function () {
-        $("#messages").text("Opponent has left the game.");
-        $("#tip").text("");
         $(".board button").attr("disabled", true);
+        $("#tip").text("");
+        if(game_finished) return;
+        $("#messages").text("Opponent has left the game.");
+        if(!muted) AUDIO.error.play();
     });
 });
 
 function setupGame() {
     // Setup table
+    game_finished = false;
     available_tokens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     chosen_token = -1;
     map = [
@@ -187,6 +241,7 @@ function renderTable() {
     $(".board button").attr("disabled", true);
 
     if (isMyTurn()) {
+        document.title = "It's your turn !";
         if (isChoosingTurn()) { // Enable available buttons.
             $("#messages").text("Your turn !");
             $("#tip").text("Choose a token for your opponent..");
@@ -198,6 +253,7 @@ function renderTable() {
             $("#chosen-token").removeAttr("disabled");
         }
     } else {
+        document.title = " Waiting for your opponent..";
         $("#messages").text("Opponent's turn...");
         $("#tip").text("");
     }
