@@ -27,24 +27,16 @@ io.sockets.on("connection", function (socket) {
     socket.emit('connect');
     if (op && joinGame(socket, op)) {
         // Send Game begin to both
+        socket.start = (Math.random() < 0.5);
+        getOpponent(socket).start = !socket.start;
         socket.emit("game.begin", {
-            playing: true,
+            playing: socket.start,
         });
         getOpponent(socket).emit("game.begin", {
-            playing: false,
+            playing: getOpponent(socket).start,
         });
 
     } else createGame(socket);
-
-    /*if (getOpponent(socket)) { // If has opponent
-        // Send Game begin to both
-        socket.emit("game.begin", {
-            playing: true,
-        });
-        getOpponent(socket).emit("game.begin", {
-            playing: false,
-        });
-    }*/
 
     socket.on("make.move", function (data) { // When someone make a move
         if (!getOpponent(socket)) return; // Check he still have an opponent
@@ -62,8 +54,25 @@ io.sockets.on("connection", function (socket) {
         }
 
         delete players[socket.shortid];
+    });
 
+    socket.on("game.rematch", function () { // When someone disconnect
+        if (getOpponent(socket).rematch) { // Check he still have an opponent
+            getOpponent(socket).rematch = false;
 
+            socket.start ^= 1;
+            getOpponent(socket).start ^= 1;
+
+            // Send Game begin to both
+            socket.emit("game.begin", {
+                playing: socket.start,
+            });
+            getOpponent(socket).emit("game.begin", {
+                playing: getOpponent(socket).start,
+            });
+        } else {
+            socket.rematch = true;
+        }
     });
 });
 

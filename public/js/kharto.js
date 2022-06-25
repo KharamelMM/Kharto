@@ -74,19 +74,22 @@ function nextTurn() {
     turn = (turn + 1) % MAX_TURN;
 }
 
-function switchVolume(){
+function switchVolume() {
     muted ^= 1;
-    if(muted)
+    if (muted)
         $(".volume").text("volume_off");
     else {
         $(".volume").text("volume_up");
         AUDIO.notify.play();
     }
 }
-function copyCode(){
-    navigator.clipboard.writeText( url+ "?op=" + socket.id.slice(socket.id.length-4,socket.id.length));
+
+function copyCode() {
+    navigator.clipboard.writeText(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length));
     $('#copied').removeClass("hidden");
-    setTimeout(function() { $('#copied').addClass("hidden"); }, 5000);
+    setTimeout(function () {
+        $('#copied').addClass("hidden");
+    }, 5000);
 
 }
 
@@ -94,9 +97,9 @@ $(function () {
     setupGame();
     $('.volume').on("click", switchVolume);
 
-    socket.on("connect", function(){
-        $('.code-container').on("click",copyCode).removeClass("hidden");
-        $('.code').text(socket.id.slice(socket.id.length-4,socket.id.length));
+    socket.on("connect", function () {
+        $('.code-container').on("click", copyCode).removeClass("hidden");
+        $('.code').text(socket.id.slice(socket.id.length - 4, socket.id.length));
     });
 
     // Event is called when either player makes a move
@@ -129,6 +132,7 @@ $(function () {
                 $("#tip").text("");
                 $("#messages").text("Tie..");
                 $(".board button").attr("disabled", true);
+                showRematch();
             } else {
                 renderTable();
             }
@@ -143,15 +147,14 @@ $(function () {
             // Show the result message
             if (isMyTurn()) {
                 $("#messages").text("You won !");
-                if(!muted) AUDIO.victory.play();
+                if (!muted) AUDIO.victory.play();
                 document.title += " - You won !"
             } else {
                 $("#messages").text("Game over, you lost..");
-                if(!muted) AUDIO.fail.play();
+                if (!muted) AUDIO.fail.play();
                 document.title += " - You lost.."
             }
-
-
+            showRematch();
         }
     });
 
@@ -161,15 +164,16 @@ $(function () {
         if (!data.playing) turn += 2; // Opponent plays first !
         $('.friend-invite').remove();
         renderTable();
+        if (!muted) AUDIO.notify.play();
     });
 
     // Disable the board if the opponent leaves
     socket.on("opponent.left", function () {
         $(".board button").attr("disabled", true);
         $("#tip").text("");
-        if(game_finished) return;
+        if (game_finished) return;
         $("#messages").text("Opponent has left the game.");
-        if(!muted) AUDIO.error.play();
+        if (!muted) AUDIO.error.play();
     });
 });
 
@@ -186,7 +190,7 @@ function setupGame() {
     ];
     turn = 1;
 
-
+    $('.rematch').addClass("hidden").off("click");
     $(".available-tokens > .col0").empty();
     $(".available-tokens > .col1").empty();
     for (let i = 0; i < available_tokens.length; i++) {
@@ -283,4 +287,10 @@ function makeMove(e) {
             position: BUTTON_ID[$(this).attr("id")]
         });
     }
+}
+function askRematch(){
+    socket.emit("game.rematch");
+}
+function showRematch(){
+    $('.rematch').removeClass("hidden").on("click", askRematch);
 }

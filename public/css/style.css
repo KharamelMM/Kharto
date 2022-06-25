@@ -8,6 +8,7 @@ body {
     background-color: black;
     color: white;
     font-family: ubuntu, sans-serif;
+    user-select: none;
 }
 
 .flex-container {
@@ -203,9 +204,6 @@ button[value="15"] > .kharto-icon {
     left: 10px;
     cursor: pointer;
     user-select: none;
-}
-
-.volume{
     z-index: 20;
 }
 .friend-invite{
@@ -225,9 +223,6 @@ button[value="15"] > .kharto-icon {
 }
 .friend-invite > div{
     margin: 25%;
-}
-br{
-    user-select: none;
 }
 .material-icons.md-45 { font-size: 45px; }
 .code-container{
@@ -249,9 +244,31 @@ br{
     font-size: 0.5em;
 }
 .hidden{
-    cursor: auto;
-    color: rgba(255,255,255,0);
-    background-color: rgba(255,255,255,0);
-    border-color: rgba(255,255,255,0);
-    transition: 2s;
+    cursor: auto !important;
+    color: rgba(255,255,255,0) !important;;
+    background-color: rgba(255,255,255,0) !important;;
+    border-color: rgba(255,255,255,0) !important;;
+    transition: 0.2s !important;;
+}
+
+.rematch{
+    font-size: 3em;
+    position: fixed;
+    bottom: 0;
+
+    /* Fixed Position Horizontal Center */
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 5px 15px 5px 15px;
+    border-color: white;
+    border-width: thick;
+    border-top-style: inset;
+    border-right-style: inset;
+    border-left-style: inset;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    background-color: rgb(125,25,25);
+    cursor: pointer;
+    transition: 0.2s;
 }
