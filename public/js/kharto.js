@@ -84,6 +84,7 @@ $(function () {
         // If the game is still going, show who's turn it is
         if (!isGameOver()) {
             if (gameTied()) {
+                $("#tip").text("");
                 $("#messages").text("Tie..");
                 $(".board button").attr("disabled", true);
             } else {
@@ -91,6 +92,7 @@ $(function () {
             }
             // If the game is over
         } else {
+            $("#tip").text("");
             // Show the result message
             if (isMyTurn()) {
                 $("#messages").text("You won !");
@@ -113,6 +115,7 @@ $(function () {
     // Disable the board if the opponent leaves
     socket.on("opponent.left", function () {
         $("#messages").text("Opponent has left the game.");
+        $("#tip").text("");
         $(".board button").attr("disabled", true);
     });
 });
