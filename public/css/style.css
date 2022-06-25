@@ -1,0 +1,197 @@
+@font-face {
+    font-family: ubuntu;
+    src: url("../fonts/UbuntuTitling-Bold.ttf");
+}
+
+body {
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-family: ubuntu, sans-serif;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.board {
+    padding: 0 5% 0 5%;
+    margin: auto;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.board button {
+    transition: 0.2s;
+
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin: 2px;
+    font-size: 3em;
+    background-color: black;
+    border-color: #E0A236;
+    color: white;
+    border-radius: 10%;
+    border-width: medium;
+
+    /* Inside icon */
+    display: inline-flex;
+    align-items: center;
+}
+
+.board button:disabled {
+    border-color: #765236;
+    border-style: dashed;
+
+
+}
+
+#chosen-token,
+.placed-tokens button {
+    border-radius: 50%;
+    border-width: thick;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+}
+
+.board button[value] > .kharto-icon {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.board button[value]:enabled:hover {
+    transform: rotate(370deg) scale(1.2); /*Hard*/
+    /*transform: rotate(10deg) scale(1.2);*/ /*Soft*/
+    cursor: pointer;
+}
+
+.board button[value="1"] > .kharto-icon,
+.board button[value="3"] > .kharto-icon,
+.board button[value="5"] > .kharto-icon,
+.board button[value="7"] > .kharto-icon {
+    background: url("../img/kharto/black_solid.png") no-repeat center;
+}
+
+.board button[value="0"] > .kharto-icon,
+.board button[value="2"] > .kharto-icon,
+.board button[value="4"] > .kharto-icon,
+.board button[value="6"] > .kharto-icon {
+    background: url("../img/kharto/white_solid.png") no-repeat center;
+}
+
+.board button[value="8"] > .kharto-icon,
+.board button[value="10"] > .kharto-icon {
+    background: url("../img/kharto/white_square_hole.png") no-repeat center;
+    background-size: cover;
+}
+
+.board button[value="9"] > .kharto-icon,
+.board button[value="11"] > .kharto-icon {
+    background: url("../img/kharto/black_square_hole.png") no-repeat center;
+    background-size: cover;
+}
+
+.board button[value="12"] > .kharto-icon,
+.board button[value="14"] > .kharto-icon {
+    background: url("../img/kharto/white_cylinder_hole.png") no-repeat center;
+    background-size: cover;
+}
+
+.board button[value="13"] > .kharto-icon,
+.board button[value="15"] > .kharto-icon {
+    background: url("../img/kharto/black_cylinder_hole.png") no-repeat center;
+    background-size: cover;
+}
+
+button[value="0"] > .kharto-icon,
+button[value="1"] > .kharto-icon,
+button[value="8"] > .kharto-icon,
+button[value="9"] > .kharto-icon {
+    height: 65%;
+    width: 65%;
+}
+
+button[value="4"] > .kharto-icon,
+button[value="5"] > .kharto-icon,
+button[value="12"] > .kharto-icon,
+button[value="13"] > .kharto-icon {
+    height: 85%;
+    width: 85%;
+}
+
+button[value="2"] > .kharto-icon,
+button[value="3"] > .kharto-icon,
+button[value="10"] > .kharto-icon,
+button[value="11"] > .kharto-icon{
+    height: 35%;
+    width: 35%;
+}
+
+button[value="6"] > .kharto-icon,
+button[value="7"] > .kharto-icon,
+button[value="14"] > .kharto-icon,
+button[value="15"] > .kharto-icon {
+    height: 40%;
+    width: 40%;
+}
+
+
+.available-tokens button[value="0"] > .kharto-icon,
+.available-tokens button[value="1"] > .kharto-icon,
+.available-tokens button[value="4"] > .kharto-icon,
+.available-tokens button[value="5"] > .kharto-icon,
+.available-tokens button[value="8"] > .kharto-icon,
+.available-tokens button[value="9"] > .kharto-icon,
+.available-tokens button[value="12"] > .kharto-icon,
+.available-tokens button[value="13"] > .kharto-icon {
+    height: 90%;
+    width: 90%;
+}
+
+.available-tokens button[value="2"] > .kharto-icon,
+.available-tokens button[value="3"] > .kharto-icon,
+.available-tokens button[value="6"] > .kharto-icon,
+.available-tokens button[value="7"] > .kharto-icon,
+.available-tokens button[value="10"] > .kharto-icon,
+.available-tokens button[value="11"] > .kharto-icon,
+.available-tokens button[value="14"] > .kharto-icon,
+.available-tokens button[value="15"] > .kharto-icon {
+    height: 60%;
+    width: 60%;
+}
+
+button[value="0"] > .kharto-icon,
+button[value="1"] > .kharto-icon,
+button[value="2"] > .kharto-icon,
+button[value="3"] > .kharto-icon,
+button[value="8"] > .kharto-icon,
+button[value="9"] > .kharto-icon,
+button[value="10"] > .kharto-icon,
+button[value="11"] > .kharto-icon {
+    border-radius: 5%;
+}
+
+button[value="4"] > .kharto-icon,
+button[value="5"] > .kharto-icon,
+button[value="6"] > .kharto-icon,
+button[value="7"] > .kharto-icon,
+button[value="12"] > .kharto-icon,
+button[value="13"] > .kharto-icon,
+button[value="14"] > .kharto-icon,
+button[value="15"] > .kharto-icon {
+    border-radius: 50%;
+}

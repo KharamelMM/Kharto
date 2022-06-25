@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <title>Kharto !</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="board">
+    <h1 id="messages">Waiting for an opponent to join...</h1>
+    <div class="flex-container">
+        <div class="available-tokens flex-container">
+            <div class="flex-container flex-column col0">
+                <!-- Will automatically be emptied by kharto.js -->
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+
+            </div>
+            <div class="flex-container flex-column col1">
+                <!-- Will automatically be emptied by kharto.js -->
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+                <button disabled="true"></button>
+            </div>
+        </div>
+        <div class="placed-tokens" style="flex-grow: 1000">
+            <table>
+                <tr>
+                    <td>
+                        <button id="a0" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="a1" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="a2" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="a3" disabled="true"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="b0" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="b1" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="b2" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="b3" disabled="true"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="c0" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="c1" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="c2" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="c3" disabled="true"></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="d0" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="d1" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="d2" disabled="true"></button>
+                    </td>
+                    <td>
+                        <button id="d3" disabled="true"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-container flex-column">
+            <div style="font-size: 1.5em">Choosen</div>
+            <div style="font-size: 1.5em">Token</div>
+            <br/>
+            <button id="chosen-token" disabled="true"></button>
+        </div>
+    </div>
+    <h2 id="tip"> </h2>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="js/kharto.js" defer></script>
+</body>
+</html>
