@@ -75,7 +75,7 @@ table {
 }
 
 .board button[value]:enabled:hover {
-    transform: rotate(370deg) scale(1.2); /*Hard*/
+    transform: rotate(10deg) scale(1.2); /*Hard*/
     /*transform: rotate(10deg) scale(1.2);*/ /*Soft*/
     cursor: pointer;
 }
@@ -84,37 +84,37 @@ table {
 .board button[value="3"] > .kharto-icon,
 .board button[value="5"] > .kharto-icon,
 .board button[value="7"] > .kharto-icon {
-    background: url("../img/kharto/black_solid.png") no-repeat center;
+    background: url("../img/kharto/black_solid.svg") no-repeat center;
 }
 
 .board button[value="0"] > .kharto-icon,
 .board button[value="2"] > .kharto-icon,
 .board button[value="4"] > .kharto-icon,
 .board button[value="6"] > .kharto-icon {
-    background: url("../img/kharto/white_solid.png") no-repeat center;
+    background: url("../img/kharto/white_solid.svg") no-repeat center;
 }
 
 .board button[value="8"] > .kharto-icon,
 .board button[value="10"] > .kharto-icon {
-    background: url("../img/kharto/white_square_hole.png") no-repeat center;
+    background: url("../img/kharto/white_square_hole.svg") no-repeat center;
     background-size: cover;
 }
 
 .board button[value="9"] > .kharto-icon,
 .board button[value="11"] > .kharto-icon {
-    background: url("../img/kharto/black_square_hole.png") no-repeat center;
+    background: url("../img/kharto/black_square_hole.svg") no-repeat center;
     background-size: cover;
 }
 
 .board button[value="12"] > .kharto-icon,
 .board button[value="14"] > .kharto-icon {
-    background: url("../img/kharto/white_cylinder_hole.png") no-repeat center;
+    background: url("../img/kharto/white_cylinder_hole.svg") no-repeat center;
     background-size: cover;
 }
 
 .board button[value="13"] > .kharto-icon,
 .board button[value="15"] > .kharto-icon {
-    background: url("../img/kharto/black_cylinder_hole.png") no-repeat center;
+    background: url("../img/kharto/black_cylinder_hole.svg") no-repeat center;
     background-size: cover;
 }
 
@@ -171,8 +171,8 @@ button[value="15"] > .kharto-icon {
 .available-tokens button[value="11"] > .kharto-icon,
 .available-tokens button[value="14"] > .kharto-icon,
 .available-tokens button[value="15"] > .kharto-icon {
-    height: 60%;
-    width: 60%;
+    height: 50%;
+    width: 50%;
 }
 
 button[value="0"] > .kharto-icon,

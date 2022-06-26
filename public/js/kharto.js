@@ -132,6 +132,8 @@ $(function () {
                 $("#tip").text("");
                 $("#messages").text("Tie..");
                 $(".board button").attr("disabled", true);
+                if (!muted) AUDIO.fail.play();
+                document.title = DEFAULT_PAGE_TITLE + " - Game Tie.."
                 showRematch();
             } else {
                 renderTable();
@@ -209,7 +211,12 @@ function setupGame() {
 }
 
 function gameTied() {
-    return available_tokens.length <= 0;
+    for (let y = 0; y < MAP_SIDE_LENGTH; y++) {
+        for (let x = 0; x < MAP_SIDE_LENGTH; x++) {
+            if(map[y][x]<0) return false;
+        }
+    }
+    return true;
 }
 
 // t1, t2, t3, t4 should be integer < 16
@@ -219,7 +226,7 @@ function compareTokens(t1, t2, t3, t4) {
 
     else if ((t1 & t2 & t3 & t4) !== 0) return true; // Check if every token have 1 on the same position
     else if ((t1 | t2 | t3 | t4) !== 15) return true;// Check if every token have 0 on the same position
-    return false; // Otherwise
+    else return false; // Otherwise
 }
 
 function isGameOver() {
