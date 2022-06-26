@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="dark-theme">
 <head>
     <title>Kharto !</title>
     <link rel="stylesheet" href="css/style.css">
@@ -8,24 +8,35 @@
     <meta property="og:url" content="https://khatro.herokuapp.com/">
     <meta property="og:title" content="You've been invited to play at Kharto.">
     <meta property="og:description" content="Come and crush your opponent !">
-    <meta property="og:image" content="https://khatro.herokuapp.com/img/poster.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <meta property="og:image" content="https://khatro.herokuapp.com/img/poster.svf">
+    <meta name="twitter:card" content="app">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+          rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 </head>
+<!--
+           _
+       .__(.)< (MEOW)
+        \___)
+ ~~~~~~~~~~~~~~~~~~-->
 <body>
-<span class="material-symbols-rounded material-icons md-45 volume">
-    volume_off
-</span>
+<div class="parameters">
+    <span class="material-icons-round md-45 volume">
+        volume_off
+    </span>
+    <span class="material-icons-round md-45 theme-swapper">
+        dark_mode
+    </span>
+</div>
 
 <div class="friend-invite">
     <div>
         <div>Click below to copy URL,</div>
         <div>and share it with your friend !</div>
-        <div class="code-container hidden">
+        <button class="code-container hidden">
             <span class="code"></span>
-        </div>
+        </button>
         <div class="hidden" id="copied">Copied !</div>
     </div>
 </div>
@@ -119,18 +130,15 @@
             </table>
         </div>
         <div class="flex-container flex-column">
-            <div style="font-size: 1.5em">Choosen</div>
-            <div style="font-size: 1.5em">Token</div>
-            <br/>
-            <button id="chosen-token" disabled="true"></button>
+            <button id="chosen-token" disabled="true" value="-1"></button>
         </div>
     </div>
     <h2 id="tip"></h2>
 </div>
 
-<div class="rematch hidden">
+<button class="rematch hidden">
     Rematch !
-</div>
+</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 <script src="js/kharto.js" defer></script>

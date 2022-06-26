@@ -45,19 +45,27 @@ io.sockets.on("connection", function (socket) {
         getOpponent(socket).emit("move.made", data);
     });
 
+    socket.on("wizz", function () { // When someone make a move
+        if (!getOpponent(socket)) return; // Check he still have an opponent
+        getOpponent(socket).emit("wizz");
+    });
+
     socket.on("disconnect", function () { // When someone disconnect
 
         if (getOpponent(socket)) { // Check he still have an opponent
 
             // Tell to the opponent that his opponent has left. (Wow brain injury)
             getOpponent(socket).emit("opponent.left");
+            getOpponent(socket).opponent = null;
         }
 
         delete players[socket.shortid];
     });
 
-    socket.on("game.rematch", function () { // When someone disconnect
-        if (getOpponent(socket).rematch) { // Check he still have an opponent
+    socket.on("game.rematch", function () {
+        if (!getOpponent(socket)) return;
+        if (getOpponent(socket).rematch) { // Check if the opponent already wants to rematch
+            // Start a new game
             getOpponent(socket).rematch = false;
 
             socket.start ^= 1;
@@ -81,18 +89,17 @@ function createGame(socket) {
         opponent: null,
         socket: socket
     };
-
 }
 
 function joinGame(socket, opponent) {
     if (!players[opponent]) return false; // If there's no opponent
-    if (players[opponent].opponent) return false; // If the opponent has already an opponent
+    // If the opponent has already an opponent and the is still in the party
+    else if (players[opponent].opponent && players[players[opponent].opponent]) return false;
 
     players[socket.shortid] = {
         opponent: players[opponent].socket.shortid,
         socket: socket
     };
-
     players[opponent].opponent = socket.shortid;
     return true;
 }

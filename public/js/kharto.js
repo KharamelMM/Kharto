@@ -2,7 +2,8 @@ const AUDIO = {
     notify: new Audio('../sound/notify.mp3'),
     error: new Audio('../sound/error.mp3'),
     victory: new Audio('../sound/victory.mp3'),
-    fail: new Audio('../sound/fail.mp3')
+    fail: new Audio('../sound/fail.mp3'),
+    move: new Audio('../sound/chessmove.wav')
 };
 
 
@@ -76,9 +77,13 @@ function nextTurn() {
 
 function switchVolume() {
     muted ^= 1;
-    if (muted)
+    if (muted) {
         $(".volume").text("volume_off");
-    else {
+        for (const [key, audio] of Object.entries(AUDIO)) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+    } else {
         $(".volume").text("volume_up");
         AUDIO.notify.play();
     }
@@ -93,9 +98,25 @@ function copyCode() {
 
 }
 
+function swapTheme() {
+    var root = document.documentElement; // Get the whole document
+
+    if (root.className === "light-theme") { // If light theme
+        root.className = "dark-theme"; // Swap to dark theme in cookie
+    } else { // Else
+        root.className = "light-theme"; // Swap to light theme in cookie
+    }
+    if (!muted) new Audio('../sound/chessmove.wav').play();
+}
+
+$(document).ready(function () {
+    document.documentElement.className = "dark-theme";
+});
+
 $(function () {
     setupGame();
     $('.volume').on("click", switchVolume);
+    $('.theme-swapper').on("click", swapTheme);
 
     socket.on("connect", function () {
         $('.code-container').on("click", copyCode).removeClass("hidden");
@@ -120,10 +141,12 @@ $(function () {
         $("#chosen-token").attr("value", chosen_token); // Place the token as chosen token (-1 or token value)
         nextTurn();
 
-        console.log((!document.hasFocus()));
-        console.log(isMyTurn());
-        if ((!document.hasFocus()) && isMyTurn() && !muted) { // Now it's your turn !
-            AUDIO.notify.play();
+        if (!muted) {
+            if ((document.hasFocus())) { // Now it's your turn !
+                AUDIO.move.play();
+            } else if (isMyTurn()) {
+                AUDIO.notify.play();
+            }
         }
 
         // If the game is still going, show who's turn it is
@@ -164,7 +187,8 @@ $(function () {
     socket.on("game.begin", function (data) {
         setupGame();
         if (!data.playing) turn += 2; // Opponent plays first !
-        $('.friend-invite').remove();
+        $('.friend-invite').addClass("hidden");
+        $('.code-container').addClass("hidden");
         renderTable();
         if (!muted) AUDIO.notify.play();
     });
@@ -173,9 +197,16 @@ $(function () {
     socket.on("opponent.left", function () {
         $(".board button").attr("disabled", true);
         $("#tip").text("");
-        if (game_finished) return;
         $("#messages").text("Opponent has left the game.");
+        $('.friend-invite').removeClass("hidden");
+        $('.code-container').removeClass("hidden");
+        $('.rematch').addClass("hidden").off("click");
         if (!muted) AUDIO.error.play();
+
+    });
+    socket.on("wizz", function(){
+        $(".board").effect( "shake", {times:1}, 100 );
+        if (!muted) new Audio('../sound/chessmove.wav').play();
     });
 });
 
@@ -213,7 +244,7 @@ function setupGame() {
 function gameTied() {
     for (let y = 0; y < MAP_SIDE_LENGTH; y++) {
         for (let x = 0; x < MAP_SIDE_LENGTH; x++) {
-            if(map[y][x]<0) return false;
+            if (map[y][x] < 0) return false;
         }
     }
     return true;
@@ -260,11 +291,11 @@ function renderTable() {
         } else {
             $("#messages").text("Your turn !");
             $("#tip").text("Place on the board, the token that your opponent has chosen..");
-            $(".placed-tokens button").removeAttr("disabled");
+            $(".placed-tokens button[value='-1']").removeAttr("disabled");
             $("#chosen-token").removeAttr("disabled");
         }
     } else {
-        document.title = " Waiting for your opponent..";
+        document.title = "Waiting for your opponent..";
         $("#messages").text("Opponent's turn...");
         $("#tip").text("");
     }
@@ -272,13 +303,9 @@ function renderTable() {
 
 
 function makeMove(e) {
-
     e.preventDefault();
-
     if (!isMyTurn()) return; // It's not your turn
-
-
-    if (isChoosingTurn()) {
+    else if (isChoosingTurn()) {
         if ($(this).attr("value") < 0) return; // No value on the button ?
 
         // Emit the move to the server
@@ -295,9 +322,23 @@ function makeMove(e) {
         });
     }
 }
-function askRematch(){
+
+function askRematch() {
     socket.emit("game.rematch");
+    $("#messages").text("Waiting for your opponent to rematch..");
+    document.title = "Waiting for rematch..";
+    $('.rematch').addClass("hidden")
+        .off("click");
+    if (!muted) new Audio('../sound/chessmove.wav').play();
 }
-function showRematch(){
-    $('.rematch').removeClass("hidden").on("click", askRematch);
+
+function showRematch() {
+    $('.rematch').removeClass("hidden")
+        .on("click", askRematch);
+}
+
+document.body.onkeyup = function(e){
+    if(e.keyCode === 32){
+        socket.emit("wizz");
+    }
 }

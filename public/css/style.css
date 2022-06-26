@@ -3,11 +3,43 @@
     src: url("../fonts/UbuntuTitling-Bold.ttf");
 }
 
-body {
-    text-align: center;
-    background-color: black;
-    color: white;
+:root{
+    transition: 0.2s;
+    color: var(--primary-text-color);
     font-family: ubuntu, sans-serif;
+}
+
+:root.light-theme {
+    --bg-color: #fffcf7;
+
+    --on-primary-color-text: #fff;
+    --primary-color: #E0A236;
+    --primary-color-dark: #8c6521;
+    --primary-text-color: #000000;
+
+    --alt-color: #765236;
+    --mask-color:rgba(255,255,255,0.8);
+    --hidden: rgba(255,255,255,0);
+}
+
+:root.dark-theme {
+    --bg-color: #000000;
+
+    --on-primary-color-text: #fff;
+    --primary-color: #E0A236;
+    --primary-color-dark: #8c6521;
+    --primary-text-color: #faf6f0;
+
+    --alt-color: #765236;
+    --mask-color:rgba(0,0,0,0.9);
+    --hidden: rgba(0,0,0,0);
+}
+
+
+body {
+    overflow: hidden; /* Hide scrollbars */
+    text-align: center;
+    background-color: var(--bg-color);
     user-select: none;
 }
 
@@ -41,9 +73,9 @@ table {
     padding: 0;
     margin: 2px;
     font-size: 3em;
-    background-color: black;
-    border-color: #E0A236;
-    color: white;
+    background-color: var(--bg-color);
+    border-color: var(--primary-color);
+    color: var(--primary-text-color);
     border-radius: 10%;
     border-width: medium;
 
@@ -53,7 +85,7 @@ table {
 }
 
 .board button:disabled {
-    border-color: #765236;
+    border-color: var(--alt-color);
     border-style: dashed;
 
 
@@ -66,6 +98,12 @@ table {
     height: 100px;
     width: 100px;
     margin: 5px;
+}
+#chosen-token{
+    border-style: outset;
+}
+#chosen-token[value="-1"]{
+    border-style: dashed !important;
 }
 
 .board button[value] > .kharto-icon {
@@ -161,6 +199,8 @@ button[value="15"] > .kharto-icon {
 .available-tokens button[value="13"] > .kharto-icon {
     height: 90%;
     width: 90%;
+    background-size: cover;
+
 }
 
 .available-tokens button[value="2"] > .kharto-icon,
@@ -197,14 +237,20 @@ button[value="15"] > .kharto-icon {
     border-radius: 50%;
 }
 
-.volume{
-    font-size: 5em;
+.parameters{
+    padding: 0;
     position: fixed;
     top: 10px;
     left: 10px;
-    cursor: pointer;
-    user-select: none;
     z-index: 20;
+}
+.parameters >span{
+    cursor: pointer;
+}
+#messages{
+    z-index: 10;
+    position: relative;
+
 }
 .friend-invite{
     position: absolute;
@@ -217,26 +263,41 @@ button[value="15"] > .kharto-icon {
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.9);
+    background-color: var(--mask-color);
     transition: 0.2s;
 
 }
 .friend-invite > div{
     margin: 25%;
 }
-.material-icons.md-45 { font-size: 45px; }
+.material-icons-round.md-45 { font-size: 45px; }
 .code-container{
+    font-family: ubuntu, sans-serif;
+    color: var(--primary-color);
     cursor: pointer;
     margin: 0.3em auto auto;
     padding: 2%;
     width: 30%;
-    background-color: rgba(125,115,90,0.2);
-    border-color: rgb(125,115,90);
+    background: var(--mask-color);
+    border-color: var(--primary-color);
     border-radius: 15px;
-    border-style: inset;
-    transition: 0.5s;
+    border-width: thick;
     font-size: 0.7em;
+    transition: 0.2s;
+    border-style: solid;
+
 }
+.code-container:hover{
+    background: var(--primary-color);
+    transition: 0s;
+    color: var(--on-primary-color-text);
+}
+.code-container:active{
+    transition: 0s;
+    background: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+
 .code::before{
     content:"#";
 }
@@ -244,31 +305,43 @@ button[value="15"] > .kharto-icon {
     font-size: 0.5em;
 }
 .hidden{
+    user-select: none;
+    pointer-events: none;
     cursor: auto !important;
-    color: rgba(255,255,255,0) !important;;
-    background-color: rgba(255,255,255,0) !important;;
-    border-color: rgba(255,255,255,0) !important;;
+    color: var(--hidden) !important;;
+    background-color: var(--hidden) !important;;
+    border-color: var(--hidden) !important;;
     transition: 0.2s !important;;
 }
 
 .rematch{
     font-size: 3em;
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
+    color: var(--primary-color);
+    font-family: ubuntu, sans-serif;
 
     /* Fixed Position Horizontal Center */
     left: 50%;
     transform: translateX(-50%);
 
     padding: 5px 15px 5px 15px;
-    border-color: white;
+    border-color: var(--primary-color);
     border-width: thick;
-    border-top-style: inset;
-    border-right-style: inset;
-    border-left-style: inset;
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-    background-color: rgb(125,25,25);
+    border-radius: 15px;
+    background-color: var(--mask-color);
     cursor: pointer;
     transition: 0.2s;
+    border-style: solid;
+
+}
+.rematch:hover{
+    background: var(--primary-color);
+    transition: 0s;
+    color: var(--on-primary-color-text);
+}
+.rematch:active{
+    transition: 0s;
+    background: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
 }
