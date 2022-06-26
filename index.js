@@ -11,8 +11,8 @@ app.use(express.static('public'))
     .get('/', function (req, res) {
         res.sendFile(__dirname + '/kharto.html');
     })
-    .get('/kharto', function (req, res) {
-        res.sendFile(__dirname + '/kharto.html');
+    .get('/rules', function (req, res) {
+        res.sendFile(__dirname + '/rules.html');
     });
 
 

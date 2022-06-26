@@ -16,6 +16,7 @@
     --primary-color: #E0A236;
     --primary-color-dark: #8c6521;
     --primary-text-color: #000000;
+    --unaccented-text-color: #3d3b38;
 
     --alt-color: #765236;
     --mask-color:rgba(255,255,255,0.8);
@@ -29,6 +30,7 @@
     --primary-color: #E0A236;
     --primary-color-dark: #8c6521;
     --primary-text-color: #faf6f0;
+    --unaccented-text-color: #b5ada7;
 
     --alt-color: #765236;
     --mask-color:rgba(0,0,0,0.9);
@@ -242,15 +244,14 @@ button[value="15"] > .kharto-icon {
     position: fixed;
     top: 10px;
     left: 10px;
-    z-index: 20;
+    z-index: 50;
 }
 .parameters >span{
     cursor: pointer;
 }
 #messages{
-    z-index: 10;
+    z-index: 20;
     position: relative;
-
 }
 .friend-invite{
     position: absolute;
@@ -269,6 +270,21 @@ button[value="15"] > .kharto-icon {
 }
 .friend-invite > div{
     margin: 25%;
+}
+.rules[href]{
+    position: fixed;
+    z-index: 20;
+    bottom: 10px;
+    right: 40px;
+    font-size: 1.2em;
+
+}
+a[href]{
+    color: var(--primary-color);
+
+}
+a[href]:active{
+    color: var(--primary-color-dark);
 }
 .material-icons-round.md-45 { font-size: 45px; }
 .code-container{
@@ -344,4 +360,25 @@ button[value="15"] > .kharto-icon {
     transition: 0s;
     background: var(--primary-color-dark);
     border-color: var(--primary-color-dark);
+}
+
+.page{
+    user-select: text;
+    margin: 2em 5em 0 5em;
+    text-align: left;
+}
+
+.page div{
+    color: var(--unaccented-text-color);
+}
+
+.page  b{
+    color: var(--primary-text-color);
+}
+
+.light-theme #board-legends{
+    content: url("../img/kharto/board_legends_white.png");
+}
+.dark-theme #board-legends{
+    content: url("../img/kharto/board_legends.png");
 }

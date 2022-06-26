@@ -1,12 +1,3 @@
-const AUDIO = {
-    notify: new Audio('../sound/notify.mp3'),
-    error: new Audio('../sound/error.mp3'),
-    victory: new Audio('../sound/victory.mp3'),
-    fail: new Audio('../sound/fail.mp3'),
-    move: new Audio('../sound/chessmove.wav')
-};
-
-
 const DEFAULT_PAGE_TITLE = 'Kharto'
 const MAP_SIDE_LENGTH = 4;
 const BUTTON_ID = {
@@ -37,8 +28,6 @@ const MAP_BUTTON = [
 ]
 
 var socket = io();
-
-var muted = true;
 
 var game_finished = false;
 var available_tokens = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Available tokens, check bits to get similarity
@@ -75,48 +64,20 @@ function nextTurn() {
     turn = (turn + 1) % MAX_TURN;
 }
 
-function switchVolume() {
-    muted ^= 1;
-    if (muted) {
-        $(".volume").text("volume_off");
-        for (const [key, audio] of Object.entries(AUDIO)) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-    } else {
-        $(".volume").text("volume_up");
-        AUDIO.notify.play();
-    }
-}
-
 function copyCode() {
-    navigator.clipboard.writeText(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length));
-    $('#copied').removeClass("hidden");
-    setTimeout(function () {
-        $('#copied').addClass("hidden");
-    }, 5000);
-
+    navigator.clipboard.writeText(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length))
+        .then(() => {
+            $('#copied').removeClass("hidden");
+            setTimeout(function () {
+                $('#copied').addClass("hidden");
+            }, 5000);
+        }).catch(() => {
+            alert(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length));
+        });
 }
-
-function swapTheme() {
-    var root = document.documentElement; // Get the whole document
-
-    if (root.className === "light-theme") { // If light theme
-        root.className = "dark-theme"; // Swap to dark theme in cookie
-    } else { // Else
-        root.className = "light-theme"; // Swap to light theme in cookie
-    }
-    if (!muted) new Audio('../sound/chessmove.wav').play();
-}
-
-$(document).ready(function () {
-    document.documentElement.className = "dark-theme";
-});
 
 $(function () {
     setupGame();
-    $('.volume').on("click", switchVolume);
-    $('.theme-swapper').on("click", swapTheme);
 
     socket.on("connect", function () {
         $('.code-container').on("click", copyCode).removeClass("hidden");
@@ -201,11 +162,12 @@ $(function () {
         $('.friend-invite').removeClass("hidden");
         $('.code-container').removeClass("hidden");
         $('.rematch').addClass("hidden").off("click");
+        document.title = "Opponent has left the game.."
         if (!muted) AUDIO.error.play();
 
     });
-    socket.on("wizz", function(){
-        $(".board").effect( "shake", {times:1}, 100 );
+    socket.on("wizz", function () {
+        $(".board").effect("shake", {times: 1}, 100);
         if (!muted) new Audio('../sound/chessmove.wav').play();
     });
 });
@@ -286,11 +248,11 @@ function renderTable() {
         document.title = "It's your turn !";
         if (isChoosingTurn()) { // Enable available buttons.
             $("#messages").text("Your turn !");
-            $("#tip").text("Choose a token for your opponent..");
+            $("#tip").text("Choose a piece for your opponent..");
             $(".available-tokens button").removeAttr("disabled");
         } else {
             $("#messages").text("Your turn !");
-            $("#tip").text("Place on the board, the token that your opponent has chosen..");
+            $("#tip").text("Place on the board, the piece that your opponent has chosen..");
             $(".placed-tokens button[value='-1']").removeAttr("disabled");
             $("#chosen-token").removeAttr("disabled");
         }
@@ -337,8 +299,8 @@ function showRematch() {
         .on("click", askRematch);
 }
 
-document.body.onkeyup = function(e){
-    if(e.keyCode === 32){
+document.body.onkeyup = function (e) {
+    if (e.keyCode === 32) {
         socket.emit("wizz");
     }
 }
