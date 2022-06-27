@@ -1,7 +1,7 @@
 {
-  "name": "Khame",
+  "name": "Kharto",
   "version": "1.0.0",
-  "description": "",
+  "description": "Play Kharto online with your friends !",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js"

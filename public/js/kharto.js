@@ -65,6 +65,13 @@ function nextTurn() {
 }
 
 function copyCode() {
+
+    function copied(){
+        $('#copied').removeClass("hidden");
+        setTimeout(function () {
+            $('#copied').addClass("hidden");
+        }, 5000);
+    }
     let codeurl = url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length);
     if (!navigator.clipboard){
         // use old commandExec() way
@@ -73,13 +80,11 @@ function copyCode() {
         temp.val(codeurl).select();
         document.execCommand("copy");
         temp.remove();
+        copied();
     } else
-    navigator.clipboard.writeText()
+    navigator.clipboard.writeText(codeurl)
         .then(() => {
-            $('#copied').removeClass("hidden");
-            setTimeout(function () {
-                $('#copied').addClass("hidden");
-            }, 5000);
+            copied();
         }).catch(() => {
             alert(codeurl);
         });
