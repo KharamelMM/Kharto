@@ -62,8 +62,17 @@ body {
 }
 
 .board > div {
-    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
 
+.board {
+    display: table;
+    flex-direction: column;
+    align-items: center;
 }
 
 .available-tokens button {
@@ -415,6 +424,20 @@ a[href]:active {
     display: flex;
 }
 
+.flex-end, .flex-start{
+    flex-grow: 10;
+}
+.placed-tokens{
+    flex-grow: 5;
+}
+.placed-tokens>table{
+    margin: auto;
+}
+.flex-start{
+    order: -100;
+}
+
+
 @media screen and (orientation: portrait) {
 
     .placed-tokens {
@@ -438,17 +461,9 @@ a[href]:active {
     }
 
     .board > div {
-        display: table-cell;
-        vertical-align: middle;
         height: 100%;
         padding: 0;
         margin: 0;
-    }
-
-    .board {
-        display: table;
-        flex-direction: column;
-        align-items: center;
     }
 
     .available-tokens > div {
@@ -546,6 +561,10 @@ a[href]:active {
 
 @media screen and (orientation: landscape) {
 
+    .board>div{
+        height: 100%;
+    }
+
     .available-tokens > div {
         min-width: 50px;
     }
@@ -583,7 +602,7 @@ a[href]:active {
             min-width: 30px;
         }
     }
-    @media screen and (max-height: 450px) {
+    @media screen and (max-height: 400px) {
         #chosen-token,
         .placed-tokens button {
             height: 40px;
@@ -607,22 +626,7 @@ a[href]:active {
             margin: 3px;
         }
     }
-    @media screen and (max-height: 350px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 30px;
-            width: 30px;
-        }
-
-        .available-tokens button {
-            height: 15px;
-            width: 15px;
-        }
-
-        .available-tokens > div {
-            min-width: 15px;
-        }
-
+    @media screen and (max-height: 300px) {
         .board button {
             border-width: thin !important;
         }
@@ -633,7 +637,7 @@ a[href]:active {
     }
 }
 
-@media screen and (max-width: 800px), screen and (max-height: 400px) {
+@media screen and (max-width: 800px), screen and (max-height: 450px) {
     :root {
         font-size: 0.7em !important;
     }
