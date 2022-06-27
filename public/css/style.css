@@ -417,8 +417,8 @@ a[href]:active {
 
 @media screen and (orientation: portrait) {
 
-    .placed-tokens{
-        order:-1;
+    .placed-tokens {
+        order: -1;
     }
 
     .available-tokens {
@@ -470,12 +470,13 @@ a[href]:active {
             height: 40px;
             width: 40px;
         }
+
         .available-tokens > div {
             min-height: 40px;
         }
     }
 
-    @media screen and (max-width: 380px), screen and (max-height: 660px) {
+    @media screen and (max-width: 450px), screen and (max-height: 660px) {
         #chosen-token,
         .placed-tokens button {
             height: 60px;
@@ -486,8 +487,59 @@ a[href]:active {
             height: 30px;
             width: 30px;
         }
+
         .available-tokens > div {
             min-height: 30px;
+        }
+    }
+
+    @media screen and (max-width: 350px), screen and (max-height: 550px) {
+        #chosen-token,
+        .placed-tokens button {
+            height: 50px;
+            width: 50px;
+        }
+
+        .available-tokens button {
+            height: 25px;
+            width: 25px;
+        }
+
+        .available-tokens > div {
+            min-height: 25px;
+        }
+
+        .board button {
+            border-width: unset !important;
+        }
+        #chosen-token,
+        .placed-tokens button {
+            margin: 3px;
+        }
+    }
+
+    @media screen and (max-width: 280px), screen and (max-height: 460px) {
+        #chosen-token,
+        .placed-tokens button {
+            height: 40px;
+            width: 40px;
+        }
+
+        .available-tokens button {
+            height: 20px;
+            width: 20px;
+        }
+
+        .available-tokens > div {
+            min-height: 20px;
+        }
+
+        .board button {
+            border-width: thin !important;
+        }
+        #chosen-token,
+        .placed-tokens button {
+            margin: 2px;
         }
     }
 }
@@ -509,12 +561,13 @@ a[href]:active {
             height: 40px;
             width: 40px;
         }
+
         .available-tokens > div {
             min-width: 40px;
         }
     }
 
-    @media only screen and (max-height: 600px) {
+    @media screen and (max-height: 600px) {
         #chosen-token,
         .placed-tokens button {
             height: 60px;
@@ -525,6 +578,7 @@ a[href]:active {
             height: 30px;
             width: 30px;
         }
+
         .available-tokens > div {
             min-width: 30px;
         }
@@ -540,6 +594,7 @@ a[href]:active {
             height: 20px;
             width: 20px;
         }
+
         .available-tokens > div {
             min-width: 20px;
         }
@@ -547,17 +602,51 @@ a[href]:active {
         .board button {
             border-width: unset !important;
         }
+        #chosen-token,
+        .placed-tokens button {
+            margin: 3px;
+        }
+    }
+    @media screen and (max-height: 350px) {
+        #chosen-token,
+        .placed-tokens button {
+            height: 30px;
+            width: 30px;
+        }
+
+        .available-tokens button {
+            height: 15px;
+            width: 15px;
+        }
+
+        .available-tokens > div {
+            min-width: 15px;
+        }
+
+        .board button {
+            border-width: thin !important;
+        }
+        #chosen-token,
+        .placed-tokens button {
+            margin: 2px;
+        }
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media screen and (max-width: 800px), screen and (max-height: 400px) {
     :root {
         font-size: 0.7em !important;
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media screen and (max-width: 500px), screen and (max-height: 350px) {
     :root {
         font-size: 0.5em !important;
+    }
+}
+
+@media screen and (max-width: 350px), screen and (max-height: 300px) {
+    :root {
+        font-size: 0.3em !important;
     }
 }
