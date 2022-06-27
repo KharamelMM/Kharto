@@ -3,7 +3,7 @@
     src: url("../fonts/UbuntuTitling-Bold.ttf");
 }
 
-:root{
+:root {
     transition: 0.2s;
     color: var(--primary-text-color);
     font-family: ubuntu, sans-serif;
@@ -19,8 +19,8 @@
     --unaccented-text-color: #3d3b38;
 
     --alt-color: #765236;
-    --mask-color:rgba(255,255,255,0.8);
-    --hidden: rgba(255,255,255,0);
+    --mask-color: rgba(255, 255, 255, 0.8);
+    --hidden: rgba(255, 255, 255, 0);
 }
 
 :root.dark-theme {
@@ -33,8 +33,8 @@
     --unaccented-text-color: #b5ada7;
 
     --alt-color: #765236;
-    --mask-color:rgba(0,0,0,0.9);
-    --hidden: rgba(0,0,0,0);
+    --mask-color: rgba(0, 0, 0, 0.9);
+    --hidden: rgba(0, 0, 0, 0);
 }
 
 
@@ -49,7 +49,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin:auto;
+    margin: auto;
 }
 
 .board {
@@ -60,11 +60,13 @@ body {
     display: flex;
     align-items: center;
 }
-.board>div{
+
+.board > div {
     width: 100%;
 
 }
-.available-tokens button{
+
+.available-tokens button {
     height: 50px;
     width: 50px;
 }
@@ -101,10 +103,12 @@ body {
     width: 100px;
     margin: 5px;
 }
-#chosen-token{
+
+#chosen-token {
     border-style: outset;
 }
-#chosen-token[value="-1"]{
+
+#chosen-token[value="-1"] {
     border-style: dashed !important;
 }
 
@@ -177,7 +181,7 @@ button[value="13"] > .kharto-icon {
 button[value="2"] > .kharto-icon,
 button[value="3"] > .kharto-icon,
 button[value="10"] > .kharto-icon,
-button[value="11"] > .kharto-icon{
+button[value="11"] > .kharto-icon {
     height: 35%;
     width: 35%;
 }
@@ -239,7 +243,7 @@ button[value="15"] > .kharto-icon {
     border-radius: 50%;
 }
 
-.parameters{
+.parameters {
     display: flex;
     padding: 0;
     position: fixed;
@@ -247,17 +251,20 @@ button[value="15"] > .kharto-icon {
     left: 10px;
     z-index: 50;
 }
-.parameters >span{
+
+.parameters > span {
     cursor: pointer;
 }
-#messages{
+
+#messages {
     z-index: 20;
     position: relative;
 }
-.friend-invite{
+
+.friend-invite {
     position: fixed;
     z-index: 10;
-    left:0;
+    left: 0;
     top: 0;
     font-size: 3em;
     user-select: none;
@@ -268,10 +275,12 @@ button[value="15"] > .kharto-icon {
     background-color: var(--mask-color);
     transition: 0.2s;
 }
-.friend-invite > div{
+
+.friend-invite > div {
     width: 100%;
 }
-.rules[href]{
+
+.rules[href] {
     position: fixed;
     z-index: 20;
     bottom: 10px;
@@ -279,15 +288,21 @@ button[value="15"] > .kharto-icon {
     font-size: 1.2em;
 
 }
-a[href]{
+
+a[href] {
     color: var(--primary-color);
 
 }
-a[href]:active{
+
+a[href]:active {
     color: var(--primary-color-dark);
 }
-.material-icons-round.md-45 { font-size: 45px; }
-.code-container{
+
+.material-icons-round.md-45 {
+    font-size: 45px;
+}
+
+.code-container {
     font-family: ubuntu, sans-serif;
     color: var(--primary-color);
     cursor: pointer;
@@ -303,24 +318,28 @@ a[href]:active{
     border-style: solid;
 
 }
-.code-container:hover{
+
+.code-container:hover {
     background: var(--primary-color);
     transition: 0s;
     color: var(--on-primary-color-text);
 }
-.code-container:active{
+
+.code-container:active {
     transition: 0s;
     background: var(--primary-color-dark);
     border-color: var(--primary-color-dark);
 }
 
-.code::before{
-    content:"#";
+.code::before {
+    content: "#";
 }
-#copied{
+
+#copied {
     font-size: 0.5em;
 }
-.hidden{
+
+.hidden {
     user-select: none;
     pointer-events: none;
     cursor: auto !important;
@@ -330,7 +349,7 @@ a[href]:active{
     transition: 0.2s !important;;
 }
 
-.rematch{
+.rematch {
     width: fit-content;
     font-size: 3em;
     position: fixed;
@@ -352,128 +371,141 @@ a[href]:active{
     border-style: solid;
 
 }
-.rematch:hover{
+
+.rematch:hover {
     background: var(--primary-color);
     transition: 0s;
     color: var(--on-primary-color-text);
 }
-.rematch:active{
+
+.rematch:active {
     transition: 0s;
     background: var(--primary-color-dark);
     border-color: var(--primary-color-dark);
 }
 
-.page{
+.page {
     user-select: text;
     margin: 2em 5em 0 5em;
     text-align: left;
 }
 
-.page div{
+.page div {
     color: var(--unaccented-text-color);
 }
 
-.page  b{
+.page b {
     color: var(--primary-text-color);
 }
 
-.light-theme #board-legends{
+.light-theme #board-legends {
     content: url("../img/kharto/board_legends_white.png");
 }
-.dark-theme #board-legends{
+
+.dark-theme #board-legends {
     content: url("../img/kharto/board_legends.png");
 }
 
 /* Responsiveness */
-.available-tokens > .flex-container{
+.available-tokens > .flex-container {
     flex-direction: column;
 }
 
-.available-tokens{
-    display:flex;
+.available-tokens {
+    display: flex;
 }
 
-@media screen and (orientation:portrait) {
+@media screen and (orientation: portrait) {
 
 
-    .available-tokens{
+    .available-tokens {
         flex-direction: column;
     }
-    .available-tokens > .flex-container{
+
+    .available-tokens > .flex-container {
         flex-direction: row;
     }
+
     .board > div > .flex-container {
         flex-direction: column;
     }
 
-    .parameters{
+    .parameters {
         flex-direction: column;
     }
 
-    .board>div{
+    .board > div {
         display: table-cell;
         vertical-align: middle;
         height: 100%;
         padding: 0;
-        margin:0;
+        margin: 0;
     }
-    .board{
+
+    .board {
         display: table;
         flex-direction: column;
         align-items: center;
     }
 
-    @media only screen and (max-height: 800px){
-        :root{
+    @media only screen and (max-height: 800px) {
+        :root {
             font-size: 0.7em;
         }
+
         #chosen-token,
         .placed-tokens button {
             height: 80px;
             width: 80px;
         }
-        .available-tokens button{
+
+        .available-tokens button {
             height: 40px;
             width: 40px;
         }
     }
 
-    @media only screen and (max-width: 380px){
+    @media screen and (max-width: 380px), screen and (max-height: 660px) {
         #chosen-token,
         .placed-tokens button {
             height: 60px;
             width: 60px;
         }
-        .available-tokens button{
+
+        .available-tokens button {
             height: 30px;
             width: 30px;
         }
     }
 }
-@media screen and (orientation: landscape){
 
-    @media only screen and (max-width: 800px){
-        :root{
+@media screen and (orientation: landscape) {
+
+    @media only screen and (max-width: 800px) {
+        :root {
             font-size: 0.7em;
         }
+
         #chosen-token,
         .placed-tokens button {
             height: 80px;
             width: 80px;
         }
-        .available-tokens button{
+
+        .available-tokens button {
             height: 40px;
             width: 40px;
         }
     }
 
-    @media only screen and (max-height: 600px){
+    @media only screen and (max-height: 600px) {
         #chosen-token,
         .placed-tokens button {
             height: 60px;
             width: 60px;
         }
-        .available-tokens button{
+
+        .available-tokens button {
             height: 30px;
             width: 30px;
         }
