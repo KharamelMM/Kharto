@@ -77,7 +77,7 @@ body {
     padding: 0;
     margin: 2px;
     font-size: 3em;
-    background-color: var(--bg-color);
+    background-color: var(--hidden);
     border-color: var(--primary-color);
     color: var(--primary-text-color);
     border-radius: 10%;
@@ -417,6 +417,9 @@ a[href]:active {
 
 @media screen and (orientation: portrait) {
 
+    .placed-tokens{
+        order:-1;
+    }
 
     .available-tokens {
         flex-direction: column;
@@ -448,6 +451,10 @@ a[href]:active {
         align-items: center;
     }
 
+    .available-tokens > div {
+        min-height: 50px;
+    }
+
     @media only screen and (max-height: 800px) {
         :root {
             font-size: 0.7em;
@@ -463,6 +470,9 @@ a[href]:active {
             height: 40px;
             width: 40px;
         }
+        .available-tokens > div {
+            min-height: 40px;
+        }
     }
 
     @media screen and (max-width: 380px), screen and (max-height: 660px) {
@@ -476,16 +486,19 @@ a[href]:active {
             height: 30px;
             width: 30px;
         }
+        .available-tokens > div {
+            min-height: 30px;
+        }
     }
 }
 
 @media screen and (orientation: landscape) {
 
-    @media only screen and (max-width: 800px) {
-        :root {
-            font-size: 0.7em;
-        }
+    .available-tokens > div {
+        min-width: 50px;
+    }
 
+    @media only screen and (max-width: 800px) {
         #chosen-token,
         .placed-tokens button {
             height: 80px;
@@ -495,6 +508,9 @@ a[href]:active {
         .available-tokens button {
             height: 40px;
             width: 40px;
+        }
+        .available-tokens > div {
+            min-width: 40px;
         }
     }
 
@@ -509,5 +525,39 @@ a[href]:active {
             height: 30px;
             width: 30px;
         }
+        .available-tokens > div {
+            min-width: 30px;
+        }
+    }
+    @media screen and (max-height: 450px) {
+        #chosen-token,
+        .placed-tokens button {
+            height: 40px;
+            width: 40px;
+        }
+
+        .available-tokens button {
+            height: 20px;
+            width: 20px;
+        }
+        .available-tokens > div {
+            min-width: 20px;
+        }
+
+        .board button {
+            border-width: unset !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    :root {
+        font-size: 0.7em !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    :root {
+        font-size: 0.5em !important;
     }
 }

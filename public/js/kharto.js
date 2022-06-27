@@ -65,14 +65,23 @@ function nextTurn() {
 }
 
 function copyCode() {
-    navigator.clipboard.writeText(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length))
+    let codeurl = url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length);
+    if (!navigator.clipboard){
+        // use old commandExec() way
+        var temp = $("<input>");
+        $("body").append(temp);
+        temp.val(codeurl).select();
+        document.execCommand("copy");
+        temp.remove();
+    } else
+    navigator.clipboard.writeText()
         .then(() => {
             $('#copied').removeClass("hidden");
             setTimeout(function () {
                 $('#copied').addClass("hidden");
             }, 5000);
         }).catch(() => {
-            alert(url + "?op=" + socket.id.slice(socket.id.length - 4, socket.id.length));
+            alert(codeurl);
         });
 }
 
@@ -113,7 +122,7 @@ $(function () {
         // If the game is still going, show who's turn it is
         if (!isGameOver()) {
             if (gameTied()) {
-                $("#tip").text("");
+                $("#tip").text("").append("<br/>");
                 $("#messages").text("Tie..");
                 $(".board button").attr("disabled", true);
                 if (!muted) AUDIO.fail.play();
@@ -129,7 +138,7 @@ $(function () {
 
             game_finished = true;
             document.title = DEFAULT_PAGE_TITLE;
-            $("#tip").text("");
+            $("#tip").text("").append("<br/>");
             // Show the result message
             if (isMyTurn()) {
                 $("#messages").text("You won !");
@@ -157,7 +166,7 @@ $(function () {
     // Disable the board if the opponent leaves
     socket.on("opponent.left", function () {
         $(".board button").attr("disabled", true);
-        $("#tip").text("");
+        $("#tip").text("").append("<br/>");
         $("#messages").text("Opponent has left the game.");
         $('.friend-invite').removeClass("hidden");
         $('.code-container').removeClass("hidden");
@@ -259,7 +268,7 @@ function renderTable() {
     } else {
         document.title = "Waiting for your opponent..";
         $("#messages").text("Opponent's turn...");
-        $("#tip").text("");
+        $("#tip").text("").append("<br/>");
     }
 }
 
