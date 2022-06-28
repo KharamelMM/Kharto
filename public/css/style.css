@@ -94,7 +94,7 @@ body {
     margin-right: auto;
 }
 
-.board button[value]{
+.board button[value] {
     overflow: visible;
     background-size: cover;
 
@@ -236,7 +236,8 @@ button[value="15"] > .kharto-icon {
 #messages {
     z-index: 20;
     position: fixed;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
     top: 2vh;
     font-size: 5vh;
 }
@@ -459,9 +460,9 @@ a[href]:active {
     order: -100;
 }
 
-@media screen and (orientation: portrait) {
+@media screen and (orientation: portrait){
     .board {
-        top:auto;
+        top: auto;
         width: auto;
         height: 100%;
         /* Fixed Position Horizontal Center */
@@ -469,7 +470,7 @@ a[href]:active {
         transform: translateX(-50%);
     }
 
-    .chosen-token-container{
+    .chosen-token-container {
         flex-grow: 5;
     }
 
@@ -492,36 +493,101 @@ a[href]:active {
     .parameters {
         flex-direction: column;
     }
+    .material-icons-round.md-45 {
+        font-size: 5vh;
+    }
+
+
+    #messages {
+        font-size: 7vw;
+    }
+
+    #tip {
+        font-size: 5vw;
+    }
+
+    .rules[href] {
+        font-size: 3vw;
+    }
+}
+
+@media screen and (max-device-aspect-ratio: 6/8) and (min-device-aspect-ratio: 5/8) {
 
     #chosen-token,
     .placed-tokens button {
-        border-width: 0.7vw;
+        border-width: 0.4vw;
         height: 15vw;
         width: 15vw;
         margin: 0.5vw;
     }
 
     .available-tokens button {
-        border-width: 0.5vw;
+        border-width: 0.3vw;
 
         height: 7vw;
         width: 7vw;
     }
 
-    .material-icons-round.md-45 {
-        font-size: 5vh;
+    #messages {
+        font-size: 5vw;
     }
-}
-/*
-@media screen and (max-width: 500px) {
-    .board button {
-        border-width: unset !important;
+
+    #tip {
+        font-size: 3vw;
+    }
+
+    .rules[href] {
+        font-size: 2vw;
     }
 }
 
-@media screen and (max-width: 250px) {
-    .board button {
-        border-width: thin !important;
+@media screen and (max-device-aspect-ratio: 1/1) and (min-device-aspect-ratio: 6/8) {
+
+    #chosen-token,
+    .placed-tokens button {
+        border-width: 0.4vw;
+        height: 11vw;
+        width: 11vw;
+        margin: 0.5vw;
+    }
+
+    .available-tokens button {
+        border-width: 0.3vw;
+
+        height: 5vw;
+        width: 5vw;
+    }
+
+    #messages {
+        font-size: 5vw;
+    }
+
+    #tip {
+        font-size: 3vw;
+    }
+
+    .rules[href] {
+        font-size: 2vw;
     }
 }
-*/
+
+@media screen and (max-device-aspect-ratio: 5/8) {
+
+
+    #chosen-token,
+    .placed-tokens button {
+        border-width: 0.7vw;
+        height: 20vw;
+        width: 20vw;
+        margin: 0.5vw;
+    }
+
+    .available-tokens button {
+        border-width: 0.5vw;
+
+        height: 9.5vw;
+        width: 9.5vw;
+    }
+
+
+}
