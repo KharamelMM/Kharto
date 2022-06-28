@@ -227,6 +227,7 @@ function setupGame() {
         .empty()
         .append("<img class='kharto-icon'/>");
     $(".game-over").addClass("hidden");
+    ctx = undefined;
     $("canvas").remove();
 
 }
