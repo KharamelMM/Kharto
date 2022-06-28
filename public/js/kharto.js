@@ -188,9 +188,11 @@ $(function () {
         $('.friend-invite').removeClass("hidden");
         $('.code-container').removeClass("hidden");
         $('.rematch').addClass("hidden").off("click");
+        $(".game-over").addClass("hidden");
+        ctx = undefined;
+        $("canvas").remove();
         document.title = "Opponent has left the game.."
         if (!muted) AUDIO.error.play();
-
     });
     socket.on("wizz", function () {
         $(".board").effect("shake", {times: 1}, 100);
