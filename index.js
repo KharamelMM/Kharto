@@ -80,6 +80,7 @@ io.sockets.on("connection", function (socket) {
             });
         } else {
             socket.rematch = true;
+            getOpponent(socket).emit("game.rematch");
         }
     });
 });

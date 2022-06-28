@@ -127,6 +127,7 @@ $(function () {
         // If the game is still going, show who's turn it is
         if (!isGameOver()) {
             if (gameTied()) {
+                game_finished = true;
                 $("#tip").text("").append("<br/>");
                 $("#messages").text("Tie..");
                 $(".board button").attr("disabled", true);
@@ -146,11 +147,15 @@ $(function () {
             $("#tip").text("").append("<br/>");
             // Show the result message
             if (isMyTurn()) {
-                $("#messages").text("You won !");
+                $("body").append("<canvas id='canvas'><script src='js/fireworks.js'></script></canvas>");
+                loop();
+                $("#messages").text("");
+                $(".game-over").text("You won !").removeClass("hidden");
                 if (!muted) AUDIO.victory.play();
                 document.title += " - You won !"
             } else {
-                $("#messages").text("Game over, you lost..");
+                $("#messages").text("");
+                $(".game-over").text("Game over, you lost..").removeClass("hidden");
                 if (!muted) AUDIO.fail.play();
                 document.title += " - You lost.."
             }
@@ -165,11 +170,18 @@ $(function () {
         $('.friend-invite').addClass("hidden");
         $('.code-container').addClass("hidden");
         renderTable();
+        if (!muted) AUDIO.move.cloneNode(true).play();
+    });
+
+    socket.on("game.rematch", function () {
+        if(!game_finished) return;
+        $('#messages').text("Your opponent wants a rematch !")
         if (!muted) AUDIO.notify.play();
     });
 
     // Disable the board if the opponent leaves
     socket.on("opponent.left", function () {
+        game_finished = true;
         $(".board button").attr("disabled", true);
         $("#tip").text("").append("<br/>");
         $("#messages").text("Opponent has left the game.");
@@ -182,7 +194,7 @@ $(function () {
     });
     socket.on("wizz", function () {
         $(".board").effect("shake", {times: 1}, 100);
-        if (!muted) new Audio('../sound/chessmove.wav').play();
+        if (!muted) AUDIO.move.cloneNode(true).play();
     });
 });
 
@@ -213,7 +225,9 @@ function setupGame() {
     $(".board button").off("click")
         .on("click", makeMove)
         .empty()
-        .append("<img class='kharto-icon'></img>");
+        .append("<img class='kharto-icon'/>");
+    $(".game-over").addClass("hidden");
+    $("canvas").remove();
 
 }
 
@@ -305,7 +319,7 @@ function askRematch() {
     document.title = "Waiting for rematch..";
     $('.rematch').addClass("hidden")
         .off("click");
-    if (!muted) new Audio('../sound/chessmove.wav').play();
+    if (!muted) AUDIO.move.play();
 }
 
 function showRematch() {

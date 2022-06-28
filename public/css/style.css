@@ -240,6 +240,7 @@ button[value="15"] > .kharto-icon {
     margin-left: 10%;
     top: 2vh;
     font-size: 5vh;
+    pointer-events: none;
 }
 
 #tip {
@@ -250,13 +251,26 @@ button[value="15"] > .kharto-icon {
     font-size: 3vh;
 
 }
+.game-over{
+    position: fixed;
+    z-index: 50;
+    background-color: var(--mask-color);
+    width: 100%;
+    font-size: 5vw;
+
+    /* Fixed Position Horizontal Center */
+    top: 50%;
+    transform: translateY(-50%);
+
+    pointer-events: none;
+}
 
 .friend-invite {
     position: fixed;
     z-index: 10;
     left: 0;
     top: 0;
-    font-size: 3em;
+    font-size: 5vw;
     user-select: none;
     display: flex;
     align-items: center;
@@ -275,7 +289,7 @@ button[value="15"] > .kharto-icon {
     z-index: 20;
     bottom: 10px;
     right: 40px;
-    font-size: 1.5vh;
+    font-size: 2.5vh;
 }
 
 a[href] {
@@ -288,10 +302,11 @@ a[href]:active {
 }
 
 .material-icons-round.md-45 {
-    font-size: 5vw;
+    font-size: 4vw;
 }
 
 .code-container {
+    z-index: 50;
     font-family: ubuntu, sans-serif;
     color: var(--primary-color);
     cursor: pointer;
@@ -301,7 +316,7 @@ a[href]:active {
     background: var(--mask-color);
     border-color: var(--primary-color);
     border-radius: 15px;
-    border-width: thick;
+    border-width: 0.7vw;
     font-size: 0.7em;
     transition: 0.2s;
     border-style: solid;
@@ -339,8 +354,9 @@ a[href]:active {
 }
 
 .rematch {
+    z-index: 50;
     width: fit-content;
-    font-size: 3em;
+    font-size: 5vw;
     position: fixed;
     bottom: 40px;
     color: var(--primary-color);
@@ -352,7 +368,7 @@ a[href]:active {
 
     padding: 5px 15px 5px 15px;
     border-color: var(--primary-color);
-    border-width: thick;
+    border-width: 0.7vw;
     border-radius: 15px;
     background-color: var(--mask-color);
     cursor: pointer;
@@ -494,7 +510,7 @@ a[href]:active {
         flex-direction: column;
     }
     .material-icons-round.md-45 {
-        font-size: 5vh;
+        font-size: 4vh;
     }
 
 
@@ -588,6 +604,14 @@ a[href]:active {
         height: 9.5vw;
         width: 9.5vw;
     }
+}
 
-
+canvas {
+    z-index: 10;
+    cursor: crosshair;
+    position: fixed;
+    display: block;
+    height:100%;
+    width: 100%;
+    margin: 0;
 }
