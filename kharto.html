@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@KharamelMM">
     <meta name="twitter:title" content="Kharto - Online Game">
-    <meta name="viewport" content= "width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
           rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -45,105 +45,101 @@
     </div>
 </div>
 <a class="rules" href="/rules" target="_blank">How to play ?</a>
+<h1 id="messages">Waiting for an opponent to join...</h1>
 <div class="board">
-    <div>
-        <h1 id="messages">Waiting for an opponent to join...</h1>
-        <div class="flex-container">
-            <div class="flex-start"></div>
-            <div class="available-tokens flex-container">
-                <div class="flex-container col0">
-                    <!-- Will automatically be emptied by kharto.js -->
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
+    <div class="flex-start"></div>
+    <div class="available-tokens flex-container">
+        <div class="flex-container col0">
+            <!-- Will automatically be emptied by kharto.js -->
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
 
-                </div>
-                <div class="flex-container col1">
-                    <!-- Will automatically be emptied by kharto.js -->
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                    <button disabled="true"></button>
-                </div>
-            </div>
-            <div class="placed-tokens">
-                <table>
-                    <tr>
-                        <td>
-                            <button id="a0" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="a1" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="a2" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="a3" disabled="true"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="b0" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="b1" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="b2" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="b3" disabled="true"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="c0" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="c1" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="c2" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="c3" disabled="true"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="d0" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="d1" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="d2" disabled="true"></button>
-                        </td>
-                        <td>
-                            <button id="d3" disabled="true"></button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="chosen-token-container flex-container flex-column">
-                <button id="chosen-token" disabled="true" value="-1"></button>
-            </div>
-            <div class="flex-end"></div>
         </div>
-        <h2 id="tip"><br/></h2>
+        <div class="flex-container col1">
+            <!-- Will automatically be emptied by kharto.js -->
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+            <button disabled="true"></button>
+        </div>
     </div>
-</div>
+    <div class="placed-tokens">
+        <table>
+            <tr>
+                <td>
+                    <button id="a0" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="a1" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="a2" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="a3" disabled="true"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="b0" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="b1" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="b2" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="b3" disabled="true"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="c0" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="c1" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="c2" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="c3" disabled="true"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button id="d0" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="d1" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="d2" disabled="true"></button>
+                </td>
+                <td>
+                    <button id="d3" disabled="true"></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="chosen-token-container flex-container flex-column">
+        <button id="chosen-token" disabled="true" value="-1"></button>
+    </div>
+    <div class="flex-end"></div>
 
+</div>
+<h2 id="tip"><br/></h2>
 <button class="rematch hidden">
     Rematch !
 </button>

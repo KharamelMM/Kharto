@@ -213,7 +213,7 @@ function setupGame() {
     $(".board button").off("click")
         .on("click", makeMove)
         .empty()
-        .append("<div class='kharto-icon'></div>");
+        .append("<img class='kharto-icon'></img>");
 
 }
 

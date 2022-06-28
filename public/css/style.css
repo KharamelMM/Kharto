@@ -52,34 +52,6 @@ body {
     margin: auto;
 }
 
-.board {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    display: flex;
-    align-items: center;
-}
-
-.board > div {
-    display: table-cell;
-    vertical-align: middle;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.board {
-    display: table;
-    flex-direction: column;
-    align-items: center;
-}
-
-.available-tokens button {
-    height: 50px;
-    width: 50px;
-}
-
 .board button {
 
     transition: 0.2s;
@@ -90,7 +62,6 @@ body {
     border-color: var(--primary-color);
     color: var(--primary-text-color);
     border-radius: 10%;
-    border-width: medium;
 
     /* Inside icon */
     display: inline-flex;
@@ -107,10 +78,6 @@ body {
 #chosen-token,
 .placed-tokens button {
     border-radius: 50%;
-    border-width: thick;
-    height: 100px;
-    width: 100px;
-    margin: 5px;
 }
 
 #chosen-token {
@@ -127,6 +94,12 @@ body {
     margin-right: auto;
 }
 
+.board button[value]{
+    overflow: visible;
+    background-size: cover;
+
+}
+
 .board button[value]:enabled:hover {
     transform: rotate(10deg) scale(1.2); /*Hard*/
     /*transform: rotate(10deg) scale(1.2);*/ /*Soft*/
@@ -137,38 +110,34 @@ body {
 .board button[value="3"] > .kharto-icon,
 .board button[value="5"] > .kharto-icon,
 .board button[value="7"] > .kharto-icon {
-    background: url("../img/kharto/black_solid.svg") no-repeat center;
+    content: url("../img/kharto/black_solid.svg");
 }
 
 .board button[value="0"] > .kharto-icon,
 .board button[value="2"] > .kharto-icon,
 .board button[value="4"] > .kharto-icon,
 .board button[value="6"] > .kharto-icon {
-    background: url("../img/kharto/white_solid.svg") no-repeat center;
+    content: url("../img/kharto/white_solid.svg");
 }
 
 .board button[value="8"] > .kharto-icon,
 .board button[value="10"] > .kharto-icon {
-    background: url("../img/kharto/white_square_hole.svg") no-repeat center;
-    background-size: cover;
+    content: url("../img/kharto/white_square_hole.svg");
 }
 
 .board button[value="9"] > .kharto-icon,
 .board button[value="11"] > .kharto-icon {
-    background: url("../img/kharto/black_square_hole.svg") no-repeat center;
-    background-size: cover;
+    content: url("../img/kharto/black_square_hole.svg");
 }
 
 .board button[value="12"] > .kharto-icon,
 .board button[value="14"] > .kharto-icon {
-    background: url("../img/kharto/white_cylinder_hole.svg") no-repeat center;
-    background-size: cover;
+    content: url("../img/kharto/white_cylinder_hole.svg");
 }
 
 .board button[value="13"] > .kharto-icon,
 .board button[value="15"] > .kharto-icon {
-    background: url("../img/kharto/black_cylinder_hole.svg") no-repeat center;
-    background-size: cover;
+    content: url("../img/kharto/black_cylinder_hole.svg");
 }
 
 button[value="0"] > .kharto-icon,
@@ -214,7 +183,6 @@ button[value="15"] > .kharto-icon {
 .available-tokens button[value="13"] > .kharto-icon {
     height: 90%;
     width: 90%;
-    background-size: cover;
 
 }
 
@@ -267,7 +235,19 @@ button[value="15"] > .kharto-icon {
 
 #messages {
     z-index: 20;
-    position: relative;
+    position: fixed;
+    width: 100%;
+    top: 2vh;
+    font-size: 5vh;
+}
+
+#tip {
+    z-index: 20;
+    position: fixed;
+    width: 100%;
+    bottom: 2vh;
+    font-size: 3vh;
+
 }
 
 .friend-invite {
@@ -294,8 +274,7 @@ button[value="15"] > .kharto-icon {
     z-index: 20;
     bottom: 10px;
     right: 40px;
-    font-size: 1.2em;
-
+    font-size: 1.5vh;
 }
 
 a[href] {
@@ -308,7 +287,7 @@ a[href]:active {
 }
 
 .material-icons-round.md-45 {
-    font-size: 3em;
+    font-size: 5vw;
 }
 
 .code-container {
@@ -416,6 +395,54 @@ a[href]:active {
 }
 
 /* Responsiveness */
+.available-tokens button {
+    height: 50px;
+    width: 50px;
+}
+
+.board {
+    height: min-content;
+    display: flex;
+    position: fixed;
+
+    width: 100%;
+    /* Fixed Position Horizontal Center */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.placed-tokens {
+    /* Inside icon */
+    display: inline-flex;
+    align-items: center;
+
+    flex-grow: 5;
+}
+
+.flex-start, .flex-end {
+    flex-grow: 10;
+}
+
+.flex-start {
+    order: -100;
+}
+
+#chosen-token,
+.placed-tokens button {
+    border-width: 0.7vh;
+
+    height: 15vh;
+    width: 15vh;
+    margin: 0.4vh;
+}
+
+.available-tokens button {
+    border-width: 0.5vh;
+
+    height: 7vh;
+    width: 7vh;
+}
+
 .available-tokens > .flex-container {
     flex-direction: column;
 }
@@ -424,21 +451,27 @@ a[href]:active {
     display: flex;
 }
 
-.flex-end, .flex-start{
-    flex-grow: 10;
-}
-.placed-tokens{
-    flex-grow: 5;
-}
-.placed-tokens>table{
+.placed-tokens > table {
     margin: auto;
 }
-.flex-start{
+
+.flex-start {
     order: -100;
 }
 
-
 @media screen and (orientation: portrait) {
+    .board {
+        top:auto;
+        width: auto;
+        height: 100%;
+        /* Fixed Position Horizontal Center */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .chosen-token-container{
+        flex-grow: 5;
+    }
 
     .placed-tokens {
         order: -1;
@@ -452,7 +485,7 @@ a[href]:active {
         flex-direction: row;
     }
 
-    .board > div > .flex-container {
+    .board {
         flex-direction: column;
     }
 
@@ -460,197 +493,35 @@ a[href]:active {
         flex-direction: column;
     }
 
-    .board > div {
-        height: 100%;
-        padding: 0;
-        margin: 0;
+    #chosen-token,
+    .placed-tokens button {
+        border-width: 0.7vw;
+        height: 15vw;
+        width: 15vw;
+        margin: 0.5vw;
     }
 
-    .available-tokens > div {
-        min-height: 50px;
+    .available-tokens button {
+        border-width: 0.5vw;
+
+        height: 7vw;
+        width: 7vw;
     }
 
-    @media only screen and (max-height: 800px) {
-        :root {
-            font-size: 0.7em;
-        }
-
-        #chosen-token,
-        .placed-tokens button {
-            height: 80px;
-            width: 80px;
-        }
-
-        .available-tokens button {
-            height: 40px;
-            width: 40px;
-        }
-
-        .available-tokens > div {
-            min-height: 40px;
-        }
+    .material-icons-round.md-45 {
+        font-size: 5vh;
     }
-
-    @media screen and (max-width: 450px), screen and (max-height: 660px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 60px;
-            width: 60px;
-        }
-
-        .available-tokens button {
-            height: 30px;
-            width: 30px;
-        }
-
-        .available-tokens > div {
-            min-height: 30px;
-        }
-    }
-
-    @media screen and (max-width: 350px), screen and (max-height: 550px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 50px;
-            width: 50px;
-        }
-
-        .available-tokens button {
-            height: 25px;
-            width: 25px;
-        }
-
-        .available-tokens > div {
-            min-height: 25px;
-        }
-
-        .board button {
-            border-width: unset !important;
-        }
-        #chosen-token,
-        .placed-tokens button {
-            margin: 3px;
-        }
-    }
-
-    @media screen and (max-width: 280px), screen and (max-height: 460px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 40px;
-            width: 40px;
-        }
-
-        .available-tokens button {
-            height: 20px;
-            width: 20px;
-        }
-
-        .available-tokens > div {
-            min-height: 20px;
-        }
-
-        .board button {
-            border-width: thin !important;
-        }
-        #chosen-token,
-        .placed-tokens button {
-            margin: 2px;
-        }
+}
+/*
+@media screen and (max-width: 500px) {
+    .board button {
+        border-width: unset !important;
     }
 }
 
-@media screen and (orientation: landscape) {
-
-    .board>div{
-        height: 100%;
-    }
-
-    .available-tokens > div {
-        min-width: 50px;
-    }
-
-    @media only screen and (max-width: 800px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 80px;
-            width: 80px;
-        }
-
-        .available-tokens button {
-            height: 40px;
-            width: 40px;
-        }
-
-        .available-tokens > div {
-            min-width: 40px;
-        }
-    }
-
-    @media screen and (max-height: 600px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 60px;
-            width: 60px;
-        }
-
-        .available-tokens button {
-            height: 30px;
-            width: 30px;
-        }
-
-        .available-tokens > div {
-            min-width: 30px;
-        }
-    }
-    @media screen and (max-height: 400px) {
-        #chosen-token,
-        .placed-tokens button {
-            height: 40px;
-            width: 40px;
-        }
-
-        .available-tokens button {
-            height: 20px;
-            width: 20px;
-        }
-
-        .available-tokens > div {
-            min-width: 20px;
-        }
-
-        .board button {
-            border-width: unset !important;
-        }
-        #chosen-token,
-        .placed-tokens button {
-            margin: 3px;
-        }
-    }
-    @media screen and (max-height: 300px) {
-        .board button {
-            border-width: thin !important;
-        }
-        #chosen-token,
-        .placed-tokens button {
-            margin: 2px;
-        }
+@media screen and (max-width: 250px) {
+    .board button {
+        border-width: thin !important;
     }
 }
-
-@media screen and (max-width: 800px), screen and (max-height: 450px) {
-    :root {
-        font-size: 0.7em !important;
-    }
-}
-
-@media screen and (max-width: 500px), screen and (max-height: 350px) {
-    :root {
-        font-size: 0.5em !important;
-    }
-}
-
-@media screen and (max-width: 350px), screen and (max-height: 300px) {
-    :root {
-        font-size: 0.3em !important;
-    }
-}
+*/
