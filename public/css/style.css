@@ -462,6 +462,7 @@ a[href]:active {
 
 .available-tokens > .flex-container {
     flex-direction: column;
+    min-width: 7vh;
 }
 
 .available-tokens {
@@ -555,6 +556,11 @@ a[href]:active {
     .rules[href] {
         font-size: 2vw;
     }
+
+    .available-tokens > .flex-container {
+        min-width: 7vw;
+    }
+
 }
 
 @media screen and (max-device-aspect-ratio: 1/1) and (min-device-aspect-ratio: 6/8) {
@@ -585,6 +591,10 @@ a[href]:active {
     .rules[href] {
         font-size: 2vw;
     }
+
+    .available-tokens > .flex-container {
+        min-width: 5vw;
+    }
 }
 
 @media screen and (max-device-aspect-ratio: 5/8) {
@@ -603,6 +613,10 @@ a[href]:active {
 
         height: 9.5vw;
         width: 9.5vw;
+    }
+
+    .available-tokens > .flex-container {
+        min-width: 9.5vw;
     }
 }
 
